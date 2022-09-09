@@ -33,7 +33,7 @@ describe('Test use case no 9785', function() {
       let input = {
         "method": "setGateway",
         "params": {
-          "chainCode": "cz91",
+          "chainCode": "",
           "gatewayList": [
             "ZTX3dgA6bzAjvyW3vDnQNGTUvWk8utSUHzU4U"
           ],
