@@ -16,9 +16,9 @@ const sdk = new ZtxChainSDK({
 
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
-describe('Test use case no 9752', function() {
+describe('Test use case no 9742', function() {
 
-  it('test startTx when params.payloadType is 3 and payload.data is correct', function() {
+  it('test startTx when params.payloadType is 4, wrong source chain code', function() {
 
     co(function* () {
 
@@ -35,9 +35,9 @@ describe('Test use case no 9752', function() {
         "method": "startTx",
         "params": {
           "extension": "extension",
-          "payloadType": "3",
+          "payloadType": "4",
           "payload": {
-            "data": "Cuba Satu Dua Tiga"
+            "amount": "50"
           },
           "destAddress": destinationAddress,
           "remark": "",
@@ -50,7 +50,7 @@ describe('Test use case no 9752', function() {
       let contractInvoke = yield sdk.operation.contractInvokeByGasOperation({
         contractAddress,
         sourceAddress,
-        gasAmount: '55',
+        gasAmount: '50',
         input: JSON.stringify(input),
       });
 

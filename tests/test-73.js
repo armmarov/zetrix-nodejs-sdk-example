@@ -4,10 +4,11 @@ const BigNumber = require('bignumber.js');
 const co = require('co');
 require('dotenv').config({path:"/../.env"})
 
-const privateKey = process.env.PRIVATE_KEY;
-const sourceAddress = process.env.SRC_ADDRESS;
+const privateKey = 'privBthNghd6oueWpsMXAUCY3Ac5dS8JLmABXBzWmJDwkEabo7BZrqxC';
+const sourceAddress = 'ZTX3dgA6bzAjvyW3vDnQNGTUvWk8utSUHzU4U';
 const destinationAddress = process.env.DST_ADDRESS;
-const contractAddress = process.env.CONTRACT_ADDRESS;
+const contractAddress = 'ZTX3RXzvqcUL7uF7Mjjj2SAsjb8kgiouUGfpV';
+
 
 const sdk = new ZtxChainSDK({
   host: "test-node.zetrix.com",
@@ -16,9 +17,9 @@ const sdk = new ZtxChainSDK({
 
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
-describe('Test use case no 9752', function() {
+describe('Test use case no 9711', function() {
 
-  it('test startTx when params.payloadType is 3 and payload.data is correct', function() {
+  it('test sendAcked for data transfer case, successful case', function() {
 
     co(function* () {
 
@@ -32,25 +33,23 @@ describe('Test use case no 9752', function() {
       console.log(nonce)
 
       let input = {
-        "method": "startTx",
+        "method": "sendAcked",
         "params": {
+          "crossTxNo": "ab01:cz01:f748eafa60710f7ceb3f150bf46dbbcc",
           "extension": "extension",
-          "payloadType": "3",
-          "payload": {
-            "data": "Cuba Satu Dua Tiga"
+          "proof": {
+            "ledgerSeq": "63052",
+            "txHash": "a32963cc5026c1ce46cbeaa4fa38871b1cc903eaf267eaf2b07bb63ff31b9a76"
           },
-          "destAddress": destinationAddress,
-          "remark": "",
-          "srcAddress": sourceAddress,
-          "version": "1.0.0",
-          "destChainCode": "ab01"
+          "result": "1",
+          "version": "1.0.0"
         }
       }
           
       let contractInvoke = yield sdk.operation.contractInvokeByGasOperation({
         contractAddress,
         sourceAddress,
-        gasAmount: '55',
+        gasAmount: '11',
         input: JSON.stringify(input),
       });
 
@@ -81,7 +80,7 @@ describe('Test use case no 9752', function() {
       const blobInfo = sdk.transaction.buildBlob({
         sourceAddress: sourceAddress,
         gasPrice: "1000",
-        feeLimit: "1100000",
+        feeLimit: "1500000",
         nonce: nonce,
         operations: [ operationItem ],
       });

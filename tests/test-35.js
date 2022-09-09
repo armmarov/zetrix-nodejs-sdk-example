@@ -6,7 +6,7 @@ require('dotenv').config({path:"/../.env"})
 
 const privateKey = process.env.PRIVATE_KEY;
 const sourceAddress = process.env.SRC_ADDRESS;
-const destinationAddress = process.env.DST_ADDRESS;
+const destinationAddress = process.env.CONTRACT_ADDRESS_BIF;
 const contractAddress = process.env.CONTRACT_ADDRESS;
 
 const sdk = new ZtxChainSDK({
@@ -16,9 +16,9 @@ const sdk = new ZtxChainSDK({
 
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
-describe('Test use case no 9752', function() {
+describe('Test use case no 9749', function() {
 
-  it('test startTx when params.payloadType is 3 and payload.data is correct', function() {
+  it('test startTx when params.payloadType is 2 and suspend relay chain', function() {
 
     co(function* () {
 
@@ -35,9 +35,17 @@ describe('Test use case no 9752', function() {
         "method": "startTx",
         "params": {
           "extension": "extension",
-          "payloadType": "3",
+          "payloadType": "2",
           "payload": {
-            "data": "Cuba Satu Dua Tiga"
+            "contractMethod": "queryBid",
+            "contractCallEncode": "",
+            "contractInput": [
+              {
+                "evidence" : {
+                  "id": "did:bid:ef7rjGkC9swFkinSWntjAGaxjSZTmphA"
+                }
+              }
+            ]
           },
           "destAddress": destinationAddress,
           "remark": "",

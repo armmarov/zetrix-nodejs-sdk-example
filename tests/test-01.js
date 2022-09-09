@@ -6,7 +6,7 @@ require('dotenv').config({path:"/../.env"})
 
 const privateKey = process.env.PRIVATE_KEY;
 const sourceAddress = process.env.SRC_ADDRESS;
-const contractAddress = process.env.CONTRACT_ADDRESS;
+const contractAddress = 'ZTX3RXzvqcUL7uF7Mjjj2SAsjb8kgiouUGfpV';
 
 const sdk = new ZtxChainSDK({
   host: "test-node.zetrix.com",
@@ -33,9 +33,9 @@ describe('Test use case no 9785', function() {
       let input = {
         "method": "setGateway",
         "params": {
-          "chainCode": "",
+          "chainCode": "cz91",
           "gatewayList": [
-            "ZTX3VzGF34efwWHeoUfWjNnZRpG8yTvksBE6f"
+            "ZTX3dgA6bzAjvyW3vDnQNGTUvWk8utSUHzU4U"
           ],
           "remark": ""
         }

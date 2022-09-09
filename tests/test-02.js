@@ -6,7 +6,7 @@ require('dotenv').config({path:"/../.env"})
 
 const privateKey = process.env.PRIVATE_KEY;
 const sourceAddress = process.env.SRC_ADDRESS;
-const contractAddress = process.env.CONTRACT_ADDRESS;
+const contractAddress = 'ZTX3RXzvqcUL7uF7Mjjj2SAsjb8kgiouUGfpV';
 
 const sdk = new ZtxChainSDK({
   host: "test-node.zetrix.com",

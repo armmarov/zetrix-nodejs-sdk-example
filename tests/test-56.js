@@ -4,10 +4,11 @@ const BigNumber = require('bignumber.js');
 const co = require('co');
 require('dotenv').config({path:"/../.env"})
 
-const privateKey = process.env.PRIVATE_KEY;
+const privateKey = 'privBx2Z16FxioN3MzzpWqmfP6kVSeWtZZDYoXLp8ocdaYX3vzdaetcz';
 const sourceAddress = process.env.SRC_ADDRESS;
-const destinationAddress = process.env.DST_ADDRESS;
+const destinationAddress = "did:bid:efJLF6NUazcDQ93auQgg971c1JdptkAe";
 const contractAddress = process.env.CONTRACT_ADDRESS;
+
 
 const sdk = new ZtxChainSDK({
   host: "test-node.zetrix.com",
@@ -16,9 +17,9 @@ const sdk = new ZtxChainSDK({
 
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
-describe('Test use case no 9752', function() {
+describe('Test use case no 9728', function() {
 
-  it('test startTx when params.payloadType is 3 and payload.data is correct', function() {
+  it('test startTx when params.payloadType is 2, incorrect private key', function() {
 
     co(function* () {
 
@@ -35,9 +36,16 @@ describe('Test use case no 9752', function() {
         "method": "startTx",
         "params": {
           "extension": "extension",
-          "payloadType": "3",
+          "payloadType": "2",
           "payload": {
-            "data": "Cuba Satu Dua Tiga"
+            "contractMethod": "testFunc-Ammar",
+            "contractCallEncode": "",
+            "contractInput": [
+              {
+                "name" : "testKey1-Ammar",
+                "value" : "testValue2-Ammar"
+              }
+            ]
           },
           "destAddress": destinationAddress,
           "remark": "",
@@ -50,7 +58,7 @@ describe('Test use case no 9752', function() {
       let contractInvoke = yield sdk.operation.contractInvokeByGasOperation({
         contractAddress,
         sourceAddress,
-        gasAmount: '55',
+        gasAmount: '50',
         input: JSON.stringify(input),
       });
 

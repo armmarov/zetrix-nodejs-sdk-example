@@ -6,8 +6,8 @@ require('dotenv').config({path:"/../.env"})
 
 const privateKey = process.env.PRIVATE_KEY;
 const sourceAddress = process.env.SRC_ADDRESS;
-const destinationAddress = process.env.DST_ADDRESS;
-const contractAddress = process.env.CONTRACT_ADDRESS;
+const destinationAddress = 'ZTX3JZ4YGeNRSmwSXV8HDZc3z43KvfrEWVZiB';
+const contractAddress = process.env.CONTRACT_ADDRESS1;
 
 const sdk = new ZtxChainSDK({
   host: "test-node.zetrix.com",
@@ -16,9 +16,9 @@ const sdk = new ZtxChainSDK({
 
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
-describe('Test use case no 9752', function() {
+describe('Test transfer gas', function() {
 
-  it('test startTx when params.payloadType is 3 and payload.data is correct', function() {
+  it('test transfer gas', function() {
 
     co(function* () {
 
@@ -35,9 +35,9 @@ describe('Test use case no 9752', function() {
         "method": "startTx",
         "params": {
           "extension": "extension",
-          "payloadType": "3",
+          "payloadType": "4",
           "payload": {
-            "data": "Cuba Satu Dua Tiga"
+            "amount": "60"
           },
           "destAddress": destinationAddress,
           "remark": "",
@@ -50,7 +50,7 @@ describe('Test use case no 9752', function() {
       let contractInvoke = yield sdk.operation.contractInvokeByGasOperation({
         contractAddress,
         sourceAddress,
-        gasAmount: '55',
+        gasAmount: '60',
         input: JSON.stringify(input),
       });
 
